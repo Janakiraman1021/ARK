@@ -25,9 +25,9 @@ class VirtualKeyboard:
             ["Esc", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12"],
             ["~", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "="],
             ["Tab", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "[", "]", "\\"],
-            ["CapsLock", "A", "S", "D", "F", "G", "H", "J", "K", "L", ";", "'", "Enter"],
+            ["CL", "A", "S", "D", "F", "G", "H", "J", "K", "L", ";", "'", "Enter"],
             ["Shift", "Z", "X", "C", "V", "B", "N", "M", ",", ".", "/", "Shift"],
-            ["Ctrl", "Win", "Alt", " ", "Alt", "Ctrl"]
+            ["Ctl", "Win", "Alt", " ", "Alt", "Ctl"]
         ]
 
         self.finalText = ""
@@ -44,9 +44,9 @@ class VirtualKeyboard:
         distance = abs(index_px[0] - x) + abs(index_px[1] - y)
 
         if x < index_px[0] < x + w and y < index_px[1] < y + h:
-            cv2.rectangle(self.img, (x, y), (x + w, y + h), (0, 255, 0), 2)  # Green borders
+            cv2.rectangle(self.img, (x, y), (x + w, y + h), (0 , 85 , 255), 2)  # Green borders
             cv2.putText(self.img, button.text, (x + 5, y + 40),
-                        cv2.FONT_HERSHEY_PLAIN, 2, (0, 255, 0), 2)
+                        cv2.FONT_HERSHEY_PLAIN, 2, (0 , 85 , 255), 2)
 
             if distance < 30:
                 self.press_key(button)
@@ -82,9 +82,9 @@ class VirtualKeyboard:
         for button in self.buttonList:
             x, y = button.pos
             w, h = button.size
-            cv2.rectangle(self.img, (x, y), (x + w, y + h), (0, 255, 0), 2)  # Green borders
+            cv2.rectangle(self.img, (x, y), (x + w, y + h), (8, 0, 255), 2)  # Green borders
             cv2.putText(self.img, button.text, (x + 5, y + 40),
-                        cv2.FONT_HERSHEY_PLAIN, 2, (0, 255, 0), 2)
+                        cv2.FONT_HERSHEY_PLAIN, 2, (0 , 85 , 255), 2)
 
     def display_pressed_keys(self):
         cv2.rectangle(self.img, (10, 550), (590, 690), (175, 0, 175), cv2.FILLED)
