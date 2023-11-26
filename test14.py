@@ -5,8 +5,8 @@ from pynput import keyboard
 from pynput.keyboard import Controller
 
 cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
-cap.set(3, 1280)  # Set width
-cap.set(4, 7200)  # Set height
+cap.set(3, 600)  # Set width
+cap.set(4, 700)  # Set height
 
 mp_hands = mp.solutions.hands
 hands = mp_hands.Hands(max_num_hands=2)
@@ -14,10 +14,12 @@ hands = mp_hands.Hands(max_num_hands=2)
 keyboard_ctrl = Controller()
 
 keys = [
-    ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
-    ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
-    ["A", "S", "D", "F", "G", "H", "J", "K", "L", ";"],
-    ["Z", "X", "C", "V", "B", "N", "M", ",", ".", "/"]
+    ["Esc", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12"],
+    ["~", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "="],
+    ["Tab", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "[", "]", "\\"],
+    ["CapsLock", "A", "S", "D", "F", "G", "H", "J", "K", "L", ";", "'", "Enter"],
+    ["Shift", "Z", "X", "C", "V", "B", "N", "M", ",", ".", "/", "Shift"],
+    ["Ctrl", "Win", "Alt", " ", "Alt", "Ctrl"]
 ]
 
 finalText = ""
@@ -52,9 +54,27 @@ while True:
                     cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)  # Green borders
                     cv2.putText(img, button.text, (x + 5, y + 40),
                                 cv2.FONT_HERSHEY_PLAIN, 2, (0, 255, 0), 2)
-
+                    spcl_keys = ["Esc", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12"]
                     if distance < 30:
-                        keyboard_ctrl.press(button.text)
+                        if button.text == "Tab":
+                            keyboard_ctrl.press(keyboard.Key.tab)
+                        elif button.text == "CapsLock":
+                            keyboard_ctrl.press(keyboard.Key.caps_lock)
+                        elif button.text == "Shift":
+                            keyboard_ctrl.press(keyboard.Key.shift)
+                        elif button.text == "Ctrl":
+                            keyboard_ctrl.press(keyboard.Key.ctrl)
+                        elif button.text == "Alt":
+                            keyboard_ctrl.press(keyboard.Key.alt)
+                        elif button.text == "Win":
+                            keyboard_ctrl.press(keyboard.Key.cmd)
+                        elif button.text == "Enter":
+                            keyboard_ctrl.press(keyboard.Key.enter)
+                        elif button.text in spcl_keys:
+                            pass
+                        else:
+                            keyboard_ctrl.press(button.text)
+
                         finalText += button.text
                         sleep(0.25)
 
