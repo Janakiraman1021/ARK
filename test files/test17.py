@@ -22,12 +22,10 @@ class VirtualKeyboard:
         self.keyboard_ctrl = Controller()
 
         self.keys = [
-            ["Esc", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12"],
-            ["~", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "="],
-            ["Tab", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "[", "]", "\\"],
-            ["CL", "A", "S", "D", "F", "G", "H", "J", "K", "L", ";", "'", "Enter"],
-            ["Shift", "Z", "X", "C", "V", "B", "N", "M", ",", ".", "/", "Shift"],
-            ["Ctl", "Win", "Alt", " ", "Alt", "Ctl"]
+            ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
+            ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
+            ["A", "S", "D", "F", "G", "H", "J", "K", "L", ";"],
+            ["Z", "X", "C", "V", "B", "N", "M", ",", ".", "/"]
         ]
 
         self.finalText = ""
@@ -82,9 +80,9 @@ class VirtualKeyboard:
         for button in self.buttonList:
             x, y = button.pos
             w, h = button.size
-            cv2.rectangle(self.img, (x, y), (x + w, y + h), (0, 85, 255), 2)  # Green borders
+            cv2.rectangle(self.img, (x, y), (x + w, y + h), (25, 255, 82), 4)  # Green borders
             cv2.putText(self.img, button.text, (x + 5, y + 40),
-                        cv2.FONT_HERSHEY_PLAIN, 2, (0, 85, 255), 2)
+                        cv2.FONT_HERSHEY_PLAIN, 2, (0, 255, 255), 2)
 
     def display_pressed_keys(self):
         cv2.rectangle(self.img, (10, 550), (590, 690), (175, 0, 175), cv2.FILLED)
